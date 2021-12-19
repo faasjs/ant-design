@@ -1,0 +1,27 @@
+name: Page
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+      - name: build
+        run: |
+          npm install
+          npm run build
+      - name: deploy
+        if: success()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_branch: gh-pages
+          publish_dir: ./storybook-static
+          exclude_assets: ''
