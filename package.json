@@ -35,7 +35,10 @@
     "@sucrase/jest-plugin": "*",
     "@testing-library/jest-dom": "*",
     "@testing-library/react": "*",
-    "jest": "*"
+    "jest": "*",
+    "react": "^17",
+    "trim": ">=0.0.3",
+    "immer": ">=9.0.6"
   },
   "peerDependencies": {
     "react": "*",
