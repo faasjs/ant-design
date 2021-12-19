@@ -4,6 +4,7 @@
     "jsx": "react",
     "declaration": true,
     "declarationDir": "lib",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node"
   }
 }

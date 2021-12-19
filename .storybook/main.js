@@ -18,7 +18,6 @@ module.exports = {
     storyStoreV7: true,
   },
   webpackFinal(config) {
-    console.log(config)
     config.module.rules = [
       {
         test: /\.css$/i,
