@@ -25,3 +25,4 @@ jobs:
           publish_branch: gh-pages
           publish_dir: ./storybook-static
           exclude_assets: ''
+          github_token: ${{ secrets.GITHUB_TOKEN }}
