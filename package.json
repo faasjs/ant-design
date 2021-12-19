@@ -18,7 +18,14 @@
   "bugs": {
     "url": "https://github.com/faasjs/ant-design/issues"
   },
-  "homepage": "https://faasjs.com",
+  "homepage": "https://faasjs.com/ant-design",
+  "funding": "https://github.com/sponsors/faasjs",
+  "engines": {
+    "npm": ">=8.0.0"
+  },
+  "files": [
+    "lib"
+  ],
   "devDependencies": {
     "@faasjs/eslint-config-react": "^0.0.2-beta.302",
     "@storybook/addon-actions": "*",
@@ -36,7 +43,6 @@
     "@testing-library/jest-dom": "*",
     "@testing-library/react": "*",
     "jest": "*",
-    "react": "^17",
     "trim": ">=0.0.3",
     "immer": ">=9.0.6"
   },
