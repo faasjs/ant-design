@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "jsx": "react",
+    "declaration": true,
+    "declarationDir": "lib",
+    "allowSyntheticDefaultImports": true
+  }
+}
