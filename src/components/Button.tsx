@@ -1,6 +1,7 @@
-import { bool, string, oneOf, func, InferProps } from 'prop-types';
-import React from 'react';
-import './button.css';
+import {
+  bool, string, oneOf, func, InferProps
+} from 'prop-types'
+import './button.css'
 
 const PropTypes = {
   /**
@@ -14,7 +15,11 @@ const PropTypes = {
   /**
    * How large should the button be?
    */
-  size: oneOf(['small', 'medium', 'large']),
+  size: oneOf([
+    'small',
+    'medium',
+    'large'
+  ]),
   /**
    * Button contents
    */
@@ -23,24 +28,30 @@ const PropTypes = {
    * Optional click handler
    */
   onClick: func,
-};
+}
 
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({ primary, backgroundColor, size, label, ...props }: InferProps<typeof PropTypes>) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+export function Button ({
+  primary, backgroundColor, size, label, ...props
+}: InferProps<typeof PropTypes>) {
+  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary'
   return (
     <button
       type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={backgroundColor && { backgroundColor }}
-      {...props}
+      className={ [
+        'storybook-button',
+        `storybook-button--${size}`,
+        mode
+      ].join(' ') }
+      style={ backgroundColor && { backgroundColor } }
+      { ...props }
     >
       {label}
     </button>
-  );
-};
+  )
+}
 
 Button.propTypes = PropTypes
 
@@ -49,4 +60,4 @@ Button.defaultProps = {
   primary: false,
   size: 'medium',
   onClick: undefined,
-};
+}
