@@ -38,8 +38,8 @@
     "webpack": "^5",
     "rollup": "*",
     "rollup-plugin-typescript2": "*",
-    "@sucrase/webpack-loader": "*",
-    "@sucrase/jest-plugin": "*",
+    "swc-loader": "*",
+    "@swc/jest": "*",
     "@testing-library/jest-dom": "*",
     "@testing-library/react": "*",
     "jest": "*",
@@ -53,7 +53,7 @@
   "jest": {
     "rootDir": "src",
     "transform": {
-      ".(jsx|tsx?)": "@sucrase/jest-plugin"
+      ".(jsx|tsx?)": "@swc/jest"
     },
     "testEnvironment": "jsdom",
     "collectCoverageFrom": [
