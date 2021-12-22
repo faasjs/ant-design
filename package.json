@@ -48,7 +48,8 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-dom": "*"
+    "react-dom": "*",
+    "antd": "*"
   },
   "jest": {
     "rootDir": "src",

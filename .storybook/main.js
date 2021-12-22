@@ -1,5 +1,22 @@
 const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 
+const swcOptions = {
+  jsc: {
+    parser: {
+      syntax: 'typescript',
+      tsx: true,
+      dynamicImport: true,
+
+    },
+    transform: {
+      react: {
+        runtime: 'automatic'
+      }
+    },
+    target: 'es2021',
+  }
+}
+
 module.exports = {
   core: {
     builder: 'webpack5',
@@ -29,20 +46,16 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: {
-          loader: '@sucrase/webpack-loader',
-          options: {
-            transforms: ['typescript', 'jsx']
-          }
+          loader: 'swc-loader',
+          options: swcOptions
         }
       },
       {
         test: /\.mdx?$/,
         use: [
           {
-            loader: '@sucrase/webpack-loader',
-            options: {
-              transforms: ['typescript', 'jsx']
-            }
+            loader: 'swc-loader',
+            options: swcOptions
           },
           {
             loader: '@mdx-js/loader',
