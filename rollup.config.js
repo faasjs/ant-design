@@ -1,6 +1,6 @@
 import typescript from 'rollup-plugin-typescript2'
-import postcss from 'rollup-plugin-postcss'
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageJson = require('./package.json')
 
 export default {
@@ -17,11 +17,6 @@ export default {
       globals: { react: 'React' }
     }
   ],
-  plugins: [
-    typescript({ useTsconfigDeclarationDir: true }),
-    postcss({
-        extensions: ['.css']
-    })
-  ],
+  plugins: [typescript({ useTsconfigDeclarationDir: true })],
   external: ['react']
 }
