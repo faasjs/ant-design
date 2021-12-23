@@ -20,12 +20,23 @@ Default.args = {
     {
       type: 'string[]',
       id: 'string[]'
-    }
+    },
+    {
+      type: 'string',
+      id: 'undefined'
+    },
+    {
+      type: 'string',
+      id: 'null'
+    },
   ],
+  rowKey: 'string',
   dataSource: [
     {
       string: 'string',
-      'string[]': ['a', 'b']
+      'string[]': ['a', 'b'],
+      undefined: undefined,
+      null: null,
     }
   ],
 }
