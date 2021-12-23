@@ -1,11 +1,7 @@
-import { oneOf, string } from 'prop-types'
+export type FaasItemType = 'string' | 'string[]'
 
-type Type = 'string' | 'string[]'
-
-export const FaasItemTypeTypes = oneOf<Type>(['string', 'string[]'])
-
-export const FaasItemTypes = {
-  type: FaasItemTypeTypes.isRequired,
-  id: string.isRequired,
-  title: string
+export type FaasItemProps = {
+  type: FaasItemType
+  id: string
+  title?: string
 }

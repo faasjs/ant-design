@@ -16,6 +16,21 @@ Default.args = {
     {
       type: 'string',
       id: 'string',
+    },
+    {
+      type: 'string[]',
+      id: 'string[]',
+    }
+  ]
+}
+
+export const Required: ComponentStory<typeof Form> = Template.bind({})
+
+Required.args = {
+  items: [
+    {
+      type: 'string',
+      id: 'string',
       rules: [{ required: true }]
     },
     {

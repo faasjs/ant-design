@@ -9,6 +9,7 @@
   "files.trimTrailingWhitespace": true,
   "eslint.packageManager": "npm",
   "cSpell.words": [
+    "Antd",
     "Faas"
   ]
 }
