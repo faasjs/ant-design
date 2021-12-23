@@ -24,13 +24,34 @@ StringList.args = {
   id: 'string list',
 }
 
+export const Number: ComponentStory<typeof FormItem> = Template.bind({})
+
+Number.args = {
+  type: 'number',
+  id: 'number',
+}
+
+export const NumberList: ComponentStory<typeof FormItem> = Template.bind({})
+
+NumberList.args = {
+  type: 'number[]',
+  id: 'number list',
+}
+
+export const Boolean: ComponentStory<typeof FormItem> = Template.bind({})
+
+Boolean.args = {
+  type: 'boolean',
+  id: 'boolean',
+}
+
 export const CustomRender: ComponentStory<typeof FormItem> = Template.bind({})
 
 CustomRender.args = {
   type: 'string',
   id: 'string',
   input: ({ value, onChange }) => <input
-    value={ value }
+    value={ value?.toUpperCase() }
     onChange={ e => onChange(e.target.value) }
   />,
 } as FormItemProps<string>

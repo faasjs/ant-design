@@ -26,8 +26,25 @@ Default.args = {
       id: 'undefined'
     },
     {
+      type: 'number',
+      id: 'number'
+    },
+    {
+      type: 'number[]',
+      id: 'number[]'
+    },
+    {
+      type: 'boolean',
+      id: 'boolean'
+    },
+    {
       type: 'string',
       id: 'null'
+    },
+    {
+      type: 'string',
+      id: 'custom',
+      render: value => <strong>{ value }</strong>,
     },
   ],
   rowKey: 'string',
@@ -35,8 +52,12 @@ Default.args = {
     {
       string: 'string',
       'string[]': ['a', 'b'],
+      number: 1,
+      'number[]': [1, 2],
+      boolean: true,
       undefined: undefined,
       null: null,
+      custom: 'custom',
     }
   ],
 }

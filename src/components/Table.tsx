@@ -5,6 +5,7 @@ import {
   TableColumnProps as AntdTableColumnProps
 } from 'antd'
 import { FaasItemProps } from './data'
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons'
 
 export type TableItemProps<T = any> = AntdTableColumnProps<T> & FaasItemProps
 
@@ -21,9 +22,14 @@ export function Table (props: TableProps) {
       if (!item.dataIndex) item.dataIndex = item.id
       if (!item.title) item.title = item.id.toUpperCase()
 
+      if (item.render) continue
+
       switch (item.type) {
         case 'string[]':
           item.render = value => value.join(', ')
+          break
+        case 'boolean':
+          item.render = value => (value ? <CheckOutlined style={ { marginTop: '4px' } } /> : <CloseOutlined style={ { marginTop: '4px' } } />)
           break
       }
     }

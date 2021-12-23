@@ -22,6 +22,18 @@ Default.args = {
       id: 'string[]'
     },
     {
+      type: 'number',
+      id: 'number'
+    },
+    {
+      type: 'number[]',
+      id: 'number[]'
+    },
+    {
+      type: 'boolean',
+      id: 'boolean'
+    },
+    {
       type: 'string',
       id: 'undefined'
     },
@@ -29,11 +41,20 @@ Default.args = {
       type: 'string',
       id: 'null'
     },
+    {
+      type: 'string',
+      id: 'custom',
+      content: ({ value }) => <strong>{ value }</strong>,
+    }
   ],
   dataSource: {
     string: 'string',
     'string[]': ['a', 'b'],
+    number: 1,
+    'number[]': [1, 2],
+    boolean: true,
     undefined: undefined,
     null: null,
+    custom: 'custom',
   }
 }

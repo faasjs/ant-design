@@ -20,7 +20,15 @@ Default.args = {
     {
       type: 'string[]',
       id: 'string[]',
-    }
+    },
+    {
+      type: 'number',
+      id: 'number'
+    },
+    {
+      type: 'number[]',
+      id: 'number[]'
+    },
   ]
 }
 
@@ -37,6 +45,16 @@ Required.args = {
       type: 'string[]',
       id: 'string[]',
       rules: [{ required: true }]
-    }
+    },
+    {
+      type: 'number',
+      id: 'number',
+      rules: [{ required: true }]
+    },
+    {
+      type: 'number[]',
+      id: 'number[]',
+      rules: [{ required: true }]
+    },
   ]
 }
