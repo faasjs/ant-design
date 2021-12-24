@@ -7,5 +7,4 @@ export type FaasItemProps = {
   type: FaasItemType
   id: string
   title?: string
-  children?: FaasItemProps[]
 }

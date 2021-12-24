@@ -7,51 +7,56 @@ import {
   Input,
   InputNumber,
   Switch,
-  Upload,
 } from 'antd'
-import {
-  MinusCircleOutlined, PlusOutlined, UploadOutlined
-} from '@ant-design/icons'
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { FaasItemProps } from './data'
 import type { RuleObject, ValidatorRule } from 'rc-field-form/lib/interface'
+import { useEffect, useState } from 'react'
+import { upperFirst } from 'lodash'
 
 export type FormItemProps<T = any> = AntdFormItemProps<T> & FaasItemProps & {
-  input?: (args: {
-    value?: T
-    onChange?: (value: T) => void
-  }) => JSX.Element
+  children?: JSX.Element
 }
 
 export function FormItem<T> (props: FormItemProps<T>) {
-  console.log(props)
+  const [computedProps, setComputedProps] = useState<FormItemProps<T>>()
 
-  if (props.input)
-    return <AntdForm.Item
-      label={ props.title || props.id }
-      name={ props.id }
-      { ...props }
-    >
-      <props.input />
+  useEffect(() => {
+    const propsCopy = { ...props }
+    if (!propsCopy.title) propsCopy.title = upperFirst(propsCopy.id)
+    if (!propsCopy.label) propsCopy.label = propsCopy.title
+    if (!propsCopy.name) propsCopy.name = propsCopy.id
+
+    switch (propsCopy.type) {
+      case 'boolean':
+        propsCopy.valuePropName = 'checked'
+        break
+    }
+
+    setComputedProps(propsCopy)
+  }, [JSON.stringify(props)])
+
+  if (!computedProps) return null
+
+  if (computedProps.children)
+    return <AntdForm.Item { ...computedProps }>
+      {computedProps.children }
     </AntdForm.Item>
 
-  switch (props.type) {
+  switch (computedProps.type) {
     case 'string':
-      return <AntdForm.Item
-        label={ props.title || props.id }
-        name={ props.id }
-        { ...props }
-      >
+      return <AntdForm.Item { ...computedProps }>
         <Input />
       </AntdForm.Item>
     case 'string[]':
       return <AntdForm.List
-        name={ props.id }
-        rules={ props.rules as ValidatorRule[] }>
+        name={ computedProps.name }
+        rules={ computedProps.rules as ValidatorRule[] }>
         {(fields, { add, remove }) => <>
           <div
             className='ant-row ant-form-item ant-form-item-label'
             style={ { rowGap: '0px' } }>
-            <label className={ props.rules?.find((r: RuleObject) => r.required) && 'ant-form-item-required' }>{props.title || props.id}</label>
+            <label className={ computedProps.rules?.find((r: RuleObject) => r.required) && 'ant-form-item-required' }>{computedProps.label}</label>
           </div>
           {fields.map(field => <AntdForm.Item key={ field.key }>
             <Row gutter={ 16 }>
@@ -86,22 +91,18 @@ export function FormItem<T> (props: FormItemProps<T>) {
         </>}
       </AntdForm.List>
     case 'number':
-      return <AntdForm.Item
-        label={ props.title || props.id }
-        name={ props.id }
-        { ...props }
-      >
+      return <AntdForm.Item { ...computedProps }>
         <InputNumber style={ { width: '100%' } } />
       </AntdForm.Item>
     case 'number[]':
       return <AntdForm.List
-        name={ props.id }
-        rules={ props.rules as ValidatorRule[] }>
+        name={ computedProps.name }
+        rules={ computedProps.rules as ValidatorRule[] }>
         {(fields, { add, remove }) => <>
           <div
             className='ant-row ant-form-item ant-form-item-label'
             style={ { rowGap: '0px' } }>
-            <label className={ props.rules?.find((r: RuleObject) => r.required) && 'ant-form-item-required' }>{props.title || props.id}</label>
+            <label className={ computedProps.rules?.find((r: RuleObject) => r.required) && 'ant-form-item-required' }>{computedProps.label}</label>
           </div>
           {fields.map(field => <AntdForm.Item key={ field.key }>
             <Row gutter={ 16 }>
@@ -136,12 +137,7 @@ export function FormItem<T> (props: FormItemProps<T>) {
         </>}
       </AntdForm.List>
     case 'boolean':
-      return <AntdForm.Item
-        label={ props.title || props.id }
-        name={ props.id }
-        valuePropName='checked'
-        { ...props }
-      >
+      return <AntdForm.Item { ...computedProps }>
         <Switch />
       </AntdForm.Item>
     default:

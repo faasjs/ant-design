@@ -1,11 +1,11 @@
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons'
 import { Descriptions, DescriptionsProps } from 'antd'
+import { upperFirst } from 'lodash'
+import { cloneElement } from 'react'
 import { FaasItemProps } from './data'
 
 export type DescriptionItemProps<T = any> = FaasItemProps & {
-  content?: (props: {
-    value: T
-  }) => JSX.Element
+  children?: JSX.Element
 }
 
 export type DescriptionProps = DescriptionsProps & {
@@ -20,8 +20,9 @@ function DescriptionItemContent (props: {
   if (typeof props.value === 'undefined' || props.value === null)
     return null
 
-  if (props.item.content)
-    return props.item.content({ value: props.value })
+  if (props.item.children) {
+    return cloneElement(props.item.children, { value: props.value })
+  }
 
   switch (props.item.type) {
     case 'string':
@@ -43,7 +44,7 @@ export function Description (props: DescriptionProps) {
   return <Descriptions { ...props }>{
     props.items.map(item => <Descriptions.Item
       key={ item.id }
-      label={ item.title || item.id.toUpperCase() }>
+      label={ item.title || upperFirst(item.id) }>
       <DescriptionItemContent
         item={ item }
         value={ props.dataSource[item.id] }

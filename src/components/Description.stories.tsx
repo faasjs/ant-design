@@ -11,6 +11,10 @@ const Template = args => <Description { ...args } />
 
 export const Default: ComponentStory<typeof Description> = Template.bind({})
 
+function MockChildren ({ value }: { value?: string }) {
+  return <strong>{value}</strong>
+}
+
 Default.args = {
   items: [
     {
@@ -44,7 +48,7 @@ Default.args = {
     {
       type: 'string',
       id: 'custom',
-      content: ({ value }) => <strong>{ value }</strong>,
+      children: <MockChildren />,
     }
   ],
   dataSource: {

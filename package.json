@@ -44,13 +44,15 @@
     "@testing-library/react": "*",
     "jest": "*",
     "trim": ">=0.0.3",
-    "immer": ">=9.0.6"
+    "immer": ">=9.0.6",
+    "@types/lodash": "*"
   },
   "peerDependencies": {
     "react": "*",
     "react-dom": "*",
     "antd": "*",
-    "@ant-design/icons": "*"
+    "@ant-design/icons": "*",
+    "lodash": "*"
   },
   "eslintConfig": {
     "extends": [

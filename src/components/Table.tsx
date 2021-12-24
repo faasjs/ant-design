@@ -6,6 +6,7 @@ import {
 } from 'antd'
 import { FaasItemProps } from './data'
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons'
+import { upperFirst } from 'lodash'
 
 export type TableItemProps<T = any> = AntdTableColumnProps<T> & FaasItemProps
 
@@ -20,7 +21,7 @@ export function Table (props: TableProps) {
     for (const item of props.items) {
       if (!item.key) item.key = item.id
       if (!item.dataIndex) item.dataIndex = item.id
-      if (!item.title) item.title = item.id.toUpperCase()
+      if (!item.title) item.title = upperFirst(item.id)
 
       if (item.render) continue
 

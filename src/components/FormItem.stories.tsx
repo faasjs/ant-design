@@ -8,7 +8,10 @@ export default {
   component: FormItem,
 } as ComponentMeta<typeof FormItem>
 
-const Template = args => <Form items={ [args] } />
+const Template = args => <Form
+  onValuesChange={ console.log }
+  items={ [args] }
+/>
 
 export const String: ComponentStory<typeof FormItem> = Template.bind({})
 
@@ -45,13 +48,17 @@ Boolean.args = {
   id: 'boolean',
 }
 
-export const CustomRender: ComponentStory<typeof FormItem> = Template.bind({})
+export const Children: ComponentStory<typeof FormItem> = Template.bind({})
 
-CustomRender.args = {
-  type: 'string',
-  id: 'string',
-  input: ({ value, onChange }) => <input
+function MockChildren ({ value, onChange }: { value?: string, onChange?: (value: string) => void }) {
+  return <input
     value={ value?.toUpperCase() }
     onChange={ e => onChange(e.target.value) }
-  />,
+  />
+}
+
+Children.args = {
+  type: 'string',
+  id: 'children',
+  children: <MockChildren />,
 } as FormItemProps<string>
