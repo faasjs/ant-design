@@ -37,7 +37,7 @@ export function FormItem<T> (props: FormItemProps<T>) {
     }
 
     setComputedProps(propsCopy)
-  }, [JSON.stringify(props)])
+  }, [props])
 
   if (!computedProps) return null
 

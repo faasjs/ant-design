@@ -29,7 +29,7 @@ function DescriptionItemContent<T = any> (props: DescriptionItemContentProps<T>)
     if (!propsCopy.item.type) propsCopy.item.type = 'string'
 
     setComputedProps(propsCopy)
-  }, [JSON.stringify(props)])
+  }, [props])
 
   if (typeof computedProps.value === 'undefined' || computedProps.value === null)
     return null
