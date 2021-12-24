@@ -26,6 +26,7 @@ export function FormItem<T> (props: FormItemProps<T>) {
     if (!propsCopy.title) propsCopy.title = upperFirst(propsCopy.id)
     if (!propsCopy.label) propsCopy.label = propsCopy.title
     if (!propsCopy.name) propsCopy.name = propsCopy.id
+    if (!propsCopy.type) propsCopy.type = 'string'
 
     switch (propsCopy.type) {
       case 'boolean':

@@ -22,11 +22,15 @@ export function Table (props: TableProps) {
       if (!item.key) item.key = item.id
       if (!item.dataIndex) item.dataIndex = item.id
       if (!item.title) item.title = upperFirst(item.id)
+      if (!item.type) item.type = 'string'
 
       if (item.render) continue
 
       switch (item.type) {
         case 'string[]':
+          item.render = value => value.join(', ')
+          break
+        case 'number[]':
           item.render = value => value.join(', ')
           break
         case 'boolean':

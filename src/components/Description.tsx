@@ -1,40 +1,54 @@
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons'
 import { Descriptions, DescriptionsProps } from 'antd'
 import { upperFirst } from 'lodash'
-import { cloneElement } from 'react'
-import { FaasItemProps } from './data'
+import {
+  cloneElement, useEffect, useState
+} from 'react'
+import { FaasItemProps, FaasItemTypeValue } from './data'
 
-export type DescriptionItemProps<T = any> = FaasItemProps & {
+export type DescriptionItemProps = FaasItemProps & {
   children?: JSX.Element
 }
 
-export type DescriptionProps = DescriptionsProps & {
+export type DescriptionProps<T = any> = DescriptionsProps & {
   items: DescriptionItemProps[]
-  dataSource: any
+  dataSource: T
 }
 
-function DescriptionItemContent (props: {
+type DescriptionItemContentProps<T = any> = {
   item: DescriptionItemProps
-  value: any
-}) {
-  if (typeof props.value === 'undefined' || props.value === null)
+  value: T
+}
+
+function DescriptionItemContent<T = any> (props: DescriptionItemContentProps<T>) {
+  const [computedProps, setComputedProps] = useState<DescriptionItemContentProps<T>>()
+
+  useEffect(() => {
+    const propsCopy = { ...props }
+    if (!propsCopy.item.title) propsCopy.item.title = upperFirst(propsCopy.item.id)
+    if (!propsCopy.item.type) propsCopy.item.type = 'string'
+
+    setComputedProps(propsCopy)
+  }, [JSON.stringify(props)])
+
+  if (typeof computedProps.value === 'undefined' || computedProps.value === null)
     return null
 
-  if (props.item.children) {
-    return cloneElement(props.item.children, { value: props.value })
+  if (computedProps.item.children) {
+    return cloneElement(computedProps.item.children, { value: computedProps.value })
   }
 
-  switch (props.item.type) {
+  switch (computedProps.item.type) {
     case 'string':
-      return props.value
+      return computedProps.value
     case 'string[]':
-      return props.value.join(', ')
+      return (computedProps.value as unknown as string[]).join(', ')
     case 'number':
-      return props.value
+      return computedProps.value
     case 'number[]':
-      return props.value.join(', ')
+      return (computedProps.value as unknown as number[]).join(', ')
     case 'boolean':
-      return props.value ? <CheckOutlined style={ { marginTop: '4px' } } /> : <CloseOutlined style={ { marginTop: '4px' } } />
+      return computedProps.value ? <CheckOutlined style={ { marginTop: '4px' } } /> : <CloseOutlined style={ { marginTop: '4px' } } />
     default:
       return null
   }
