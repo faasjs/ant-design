@@ -8,7 +8,7 @@ import { FaasItemProps } from './data'
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons'
 import { upperFirst } from 'lodash'
 
-export type TableItemProps<T = any> = AntdTableColumnProps<T> & FaasItemProps
+export type TableItemProps<T = any> = FaasItemProps & AntdTableColumnProps<T>
 
 export type TableProps<T = any> = AntdTableProps<T> & {
   items: TableItemProps[]

@@ -4,7 +4,7 @@ import {
 } from 'antd'
 import { FormItem, FormItemProps } from './FormItem'
 
-export type FormProps = AntdFormProps & { items: FormItemProps[] }
+export type FormProps = { items: FormItemProps[] } & AntdFormProps
 
 export function Form (props: FormProps) {
   console.log(props)

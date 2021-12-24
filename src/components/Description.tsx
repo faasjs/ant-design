@@ -4,16 +4,16 @@ import { upperFirst } from 'lodash'
 import {
   cloneElement, useEffect, useState
 } from 'react'
-import { FaasItemProps, FaasItemTypeValue } from './data'
+import { FaasItemProps } from './data'
 
 export type DescriptionItemProps = FaasItemProps & {
   children?: JSX.Element
 }
 
-export type DescriptionProps<T = any> = DescriptionsProps & {
+export type DescriptionProps<T = any> = {
   items: DescriptionItemProps[]
   dataSource: T
-}
+} & DescriptionsProps
 
 type DescriptionItemContentProps<T = any> = {
   item: DescriptionItemProps

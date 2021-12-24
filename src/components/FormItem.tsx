@@ -14,9 +14,10 @@ import type { RuleObject, ValidatorRule } from 'rc-field-form/lib/interface'
 import { useEffect, useState } from 'react'
 import { upperFirst } from 'lodash'
 
-export type FormItemProps<T = any> = AntdFormItemProps<T> & FaasItemProps & {
+export type FormItemProps<T = any> = {
   children?: JSX.Element
-}
+  rules?: RuleObject[]
+} & FaasItemProps & AntdFormItemProps<T>
 
 export function FormItem<T> (props: FormItemProps<T>) {
   const [computedProps, setComputedProps] = useState<FormItemProps<T>>()
@@ -27,6 +28,7 @@ export function FormItem<T> (props: FormItemProps<T>) {
     if (!propsCopy.label) propsCopy.label = propsCopy.title
     if (!propsCopy.name) propsCopy.name = propsCopy.id
     if (!propsCopy.type) propsCopy.type = 'string'
+    if (!propsCopy.rules) propsCopy.rules = []
 
     switch (propsCopy.type) {
       case 'boolean':
@@ -57,7 +59,7 @@ export function FormItem<T> (props: FormItemProps<T>) {
           <div
             className='ant-row ant-form-item ant-form-item-label'
             style={ { rowGap: '0px' } }>
-            <label className={ computedProps.rules?.find((r: RuleObject) => r.required) && 'ant-form-item-required' }>{computedProps.label}</label>
+            <label className={ computedProps.rules.find(r => r.required) && 'ant-form-item-required' }>{computedProps.label}</label>
           </div>
           {fields.map(field => <AntdForm.Item key={ field.key }>
             <Row gutter={ 16 }>
@@ -70,13 +72,13 @@ export function FormItem<T> (props: FormItemProps<T>) {
                 </AntdForm.Item>
               </Col>
               <Col span={ 1 }>
-                <Button
+                {!computedProps.rules.find(r => r.required) && <Button
                   danger
                   type='link'
                   style={ { float: 'right' } }
                   icon={ <MinusCircleOutlined /> }
                   onClick={ () => remove(field.name) }
-                />
+                />}
               </Col>
             </Row>
           </AntdForm.Item>)}
